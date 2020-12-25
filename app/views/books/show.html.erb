@@ -1,0 +1,54 @@
+<div class="row p-3">
+ <div class="col-md-3 ">
+  <h2>User info</h2>
+  <%= attachment_image_tag(@book.user, :profile_image,:fill,100,100,fallback:'no-image.jpg') %>
+<table class="table">
+ <tbody>
+ <tr>
+ <th>name</th>
+ <th><%= @book.user.name %></th>
+ </tr>
+ <tr>
+ <th>introduction</th>
+<th><%= @book.user.introduction %></th>
+</tr>
+</tbody>
+</table>
+<div class="row">
+<%= link_to edit_user_path(@book.user.id), class: "bg-white text-dark btn btn-secondary btn-block " do %><i class="fas fa-user-cog"></i><% end %>
+</div>
+<h2 class="mt-3">New book</h2>
+<%= form_with model: @book_new, local:true do |f| %>
+ <h4>Title</h4>
+ <%= f.text_field :title, class: "form-control" %>
+ <h4>Body</h4>
+ <%= f.text_area :body, class: "form-control" %>
+ <div class ="form-group">
+ <p><%= f.submit class: " btn btn-success Create Book" %></p>
+ </div>
+ <% end %>
+ </div>
+<div class ="col-md-8 offset-md-1">
+ <h2>Book detail</h2>
+ <table class="table">
+  <tbody>
+   <tr>
+    <td>
+     <div>
+    <%= link_to user_path(@book.user.id) do %>
+　　<%= attachment_image_tag(@book.user, :profile_image,:fill,40,40,fallback:'no-image.jpg') %>
+    <p><%= @book.user.name %></p>
+　　</td>
+　　<% end %>
+　　</div>
+<td><%= @book.title %></td>
+<td><%= @book.body %></td>
+<% if user_signed_in? && current_user.id == @book.user_id %>
+<td><%= link_to 'Edit', edit_book_path(@book.id), class: "btn btn-success"  %></td>
+<td><%= link_to 'Destroy', book_path(@book.id), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger"  %></td>
+<% end %>
+ </tr>
+ </tbody>
+ </table>
+</div>
+</div>

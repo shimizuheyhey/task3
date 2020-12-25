@@ -1,0 +1,23 @@
+<div class="container p-2">
+  <div class="row">
+    <div class="mx-auto">
+<h2><storong>User info</storong></h2>
+<%= form_with model:@user, local:true do |f| %>
+<%= render 'layouts/error_users', model: f.object %>
+<div class="form-group">
+  <label for="inputName">Name</label>
+  <p><%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前を入力してください", class: "form-control" %></p>
+  </div>
+  <div class="form-group">
+  <label for="inputImage">Image</label>
+  <p><%= f.attachment_field :profile_image %></p>
+  </div>
+  <div class="form-group">
+  <label for="inputintroduction">introduction</label>
+  <p><%= f.text_area :introduction, autofocus: true, id:"inputIntroduction", placeholder:"５０文字以内で自己紹介文を入力してください", class: "form-control"  %></p>
+  </div>
+  <%= f.submit class: " btn btn-secondary Update User" %>
+  </div>
+  </div>
+  </div>
+<% end %>
